@@ -53,6 +53,15 @@ def csv_download():
 
     #Generates Max Range of Data
     hist = tickers.history(period="max").reset_index()
+    #Causes an exception error: This is needed in order to not download csv files with no data due to invalid stock symbols E.G. (TSLA would be excepted, dushoqysh would not be)
+    try:
+        if hist.empty:
+            print("Invalid Symbol - Please Try Again")
+    except:
+        print("data is empty")
+        raise Exception
+    else:
+        return hist
 
     #Creates a CSV filename Based on User Input
     fileName = "{}.csv".format(symbol)
