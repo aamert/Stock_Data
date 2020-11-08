@@ -16,7 +16,7 @@ def Users_input():
     return input()
 
 #Sets Users Input
-symbol = Users_input()
+symbol = Users_input().upper()
 
 #Sets Filepath For Current File
 path = os.path.dirname(__file__)
@@ -77,12 +77,8 @@ def csv_download():
 def file_check():        
     #stock_exists checks if file exists - if it does, Checks if file was updated today.
     if Stock_Existing_Test == 1:
-        print("File Up To Date")
+         print(("{}.csv".format(symbol)))
         
     #If Stock doesn't exists, it gets downloaded
     else:
-        csv_download()
-
-
-#Set for file initialization in spyder
-file_check() 
+       return csv_download()
