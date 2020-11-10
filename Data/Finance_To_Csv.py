@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Nov  7 00:30:00 2020
+Created on Sat Nov  9 00:30:00 2020
 
 @author: JTSC
 """
@@ -50,8 +50,6 @@ Stock_Existing_Test = Stock_exists()
 def csv_download():
     #Gets Stock Symbol Information
     tickers = yf.Ticker(symbol)
-    #Generates csv filename
-    fileName = "{}.csv".format(symbol)
 
     #Generates Max Range of Data
     hist = tickers.history(period="max").reset_index()
@@ -63,15 +61,23 @@ def csv_download():
         print("data is empty")
         raise Exception
     else:
-        return hist.to_csv(fileName,
+        pass
+
+    #Creates a CSV filename Based on User Input
+    fileName = "{}.csv".format(symbol)
+
+    #Uses Filename to Create CSV File
+    hist.to_csv(fileName,
             index=False,
-            sep=","), print("Downloaded")
+            sep=",")
+    return print("Downloaded")
+    
 
     #Checks to see if Stock Symbol CSV Exists
 def file_check():        
     #stock_exists checks if file exists - if it does, Checks if file was updated today.
     if Stock_Existing_Test == 1:
-         print(("{}.csv".format(symbol)))
+      return   print(("{}.csv".format(symbol)))
         
     #If Stock doesn't exists, it gets downloaded
     else:
